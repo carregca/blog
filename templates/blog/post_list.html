@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Blog | Facundo Garcia{% endblock %}
+{% block meta_description %}Blog de Facundo Garcia: notas sobre programación, proyectos y lo que voy aprendiendo.{% endblock %}
+
+{% block content %}
+<section class="section blog-page">
+
+    <h2>Blog</h2>
+
+    <p>
+        Notas sobre lo que voy aprendiendo, los proyectos que armo
+        y las cosas que me salieron mal en el camino.
+    </p>
+
+    <div class="posts-list">
+        {% for post in posts %}
+            {% include "blog/_post_card.html" %}
+        {% empty %}
+            <p class="empty-state">Todavía no hay entradas publicadas. Volvé pronto.</p>
+        {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav class="pagination" aria-label="Paginación">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">← Más nuevas</a>
+        {% else %}
+            <span class="disabled">← Más nuevas</span>
+        {% endif %}
+
+        <span class="pagination-current">Página {{ page_obj.number }} de {{ paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Más antiguas →</a>
+        {% else %}
+            <span class="disabled">Más antiguas →</span>
+        {% endif %}
+    </nav>
+    {% endif %}
+
+</section>
+{% endblock %}

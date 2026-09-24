@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} | Blog de Facundo Garcia{% endblock %}
+{% block meta_description %}{{ post.summary }}{% endblock %}
+
+{% block content %}
+<article class="section blog-page post-detail">
+
+    <a class="back-link" href="{% url 'blog:post_list' %}">Volver al blog</a>
+
+    {% if not post.published %}
+        <p class="draft-notice">Borrador: solo lo ves vos porque sos administrador.</p>
+    {% endif %}
+
+    <div class="post-header">
+        <p class="post-meta">
+            <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j \d\e F \d\e Y" }}</time>
+            {% if post.updated_at|date:"Ymd" != post.published_at|date:"Ymd" %}
+                <span>Editado el {{ post.updated_at|date:"d/m/Y" }}</span>
+            {% endif %}
+        </p>
+        <h1>{{ post.title }}</h1>
+        <p class="post-lead">{{ post.summary }}</p>
+    </div>
+
+    {% if post.cover %}
+        <figure class="post-cover">
+            <img src="{{ post.cover.url }}" alt="Portada de {{ post.title }}">
+        </figure>
+    {% endif %}
+
+    <div class="post-body">
+        {{ post.content|linebreaks }}
+    </div>
+
+    {% if media_items %}
+    <section class="post-media" aria-label="Archivos multimedia">
+        {% for item in media_items %}
+            <figure class="media-item">
+                {% if item.is_image %}
+                    <img src="{{ item.file.url }}" alt="{{ item.caption|default:post.title }}" loading="lazy">
+                {% elif item.is_video %}
+                    <video controls preload="metadata" src="{{ item.file.url }}"></video>
+                {% else %}
+                    <a class="media-file" href="{{ item.file.url }}" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-file-pdf"></i> Abrir {{ item.extension|upper }}
+                    </a>
+                {% endif %}
+                {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
+            </figure>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    <nav class="post-nav" aria-label="Entradas vecinas">
+        {% if newer_post %}
+            <a href="{{ newer_post.get_absolute_url }}"><small>← Más nueva</small>{{ newer_post.title }}</a>
+        {% else %}<span></span>{% endif %}
+        {% if older_post %}
+            <a class="align-right" href="{{ older_post.get_absolute_url }}"><small>Más antigua →</small>{{ older_post.title }}</a>
+        {% else %}<span></span>{% endif %}
+    </nav>
+
+    <section id="comentarios" class="comments">
+
+        <h2>Comentarios <span>({{ comments|length }})</span></h2>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="message {{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% for comment in comments %}
+            <div class="comment" id="comentario-{{ comment.pk }}">
+                <p class="comment-meta">
+                    <strong>{{ comment.name }}</strong>
+                    <time datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at|date:"d/m/Y H:i" }}</time>
+                </p>
+                <p class="comment-body">{{ comment.body|linebreaksbr }}</p>
+
+                {% if perms.blog.delete_comment %}
+                    <form method="post" action="{% url 'blog:comment_delete' comment.pk %}"
+                          onsubmit="return confirm('¿Eliminar este comentario?');">
+                        {% csrf_token %}
+                        <button type="submit" class="comment-delete">Eliminar</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p class="empty-state">Todavía no hay comentarios. ¡Sé el primero!</p>
+        {% endfor %}
+
+        <form method="post" class="comment-form" novalidate>
+            {% csrf_token %}
+            <h3>Dejá tu comentario</h3>
+
+            {% if form.non_field_errors %}
+                <ul class="errorlist">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>
+            {% endif %}
+
+            <div class="field">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+
+            <div class="field">
+                {{ form.body.label_tag }}
+                {{ form.body }}
+                {{ form.body.errors }}
+            </div>
+
+            <div class="hp-field" aria-hidden="true">{{ form.website }}</div>
+
+            <button type="submit" class="button">Publicar comentario</button>
+        </form>
+
+    </section>
+
+</article>
+{% endblock %}

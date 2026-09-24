@@ -1,0 +1,27 @@
+{# Tarjeta de una entrada. Se usa en el listado del blog y en la home. #}
+<article class="post-card">
+
+    <a class="post-card-media" href="{{ post.get_absolute_url }}" tabindex="-1" aria-hidden="true">
+        {% if post.cover %}
+            <img src="{{ post.cover.url }}" alt="">
+        {% else %}
+            <span class="post-card-placeholder">FG</span>
+        {% endif %}
+    </a>
+
+    <div class="post-card-content">
+
+        <p class="post-meta">
+            <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"d M Y" }}</time>
+            {% with n=post.comments.count %}<span>{{ n }} comentario{{ n|pluralize }}</span>{% endwith %}
+        </p>
+
+        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+
+        <p class="post-summary">{{ post.summary }}</p>
+
+        <a class="post-link" href="{{ post.get_absolute_url }}">Leer entrada</a>
+
+    </div>
+
+</article>

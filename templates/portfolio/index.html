@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+        <section id="inicio" class="hero">
+
+            <div class="hero-content">
+
+                <p>Hola, soy</p>
+
+                <h1>Facundo Garcia</h1>
+
+                <h2>Estudiante de programación | Python Developer</h2>
+
+                <p>
+                    Soy estudiante de programación interesado en el desarrollo
+                    de software, algoritmos, estructuras de datos, bases de datos
+                    y automatización.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#proyectos" class="button">
+                        Ver mis proyectos
+                    </a>
+
+                    <a href="{% static 'cv/cv.pdf' %}" class="button" download>
+                        Descargar CV
+                    </a>
+
+                </div>
+
+                <div class="social-links">
+
+                    <a href="https://github.com/carregca" target="_blank">
+                        Mi GitHub
+                    </a>
+
+                    <a href="mailto:garciacarrerafacundo@gmail.com">
+                        Email
+                    </a>
+
+                    <a href="{% url 'blog:post_list' %}">
+                        Blog
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="sobre-mi" class="section">
+
+            <h2>Sobre mí</h2>
+
+            <div class="about-content">
+
+                <div class="about-text">
+
+                    <h3>Estudiante apasionado por la programación</h3>
+
+                    <p>
+                        Soy Facundo Garcia, estudiante de programación interesado
+                        en aprender y desarrollar soluciones utilizando diferentes
+                        tecnologías.
+                    </p>
+
+                    <p>
+                        Actualmente me interesa especialmente Python, las estructuras
+                        de datos, los algoritmos, las bases de datos y el desarrollo
+                        de software.
+                    </p>
+
+                    <p>
+                        También me interesa aprender nuevas tecnologías y aplicar
+                        mis conocimientos en proyectos prácticos.
+                    </p>
+
+                    <ul>
+                        <li>Programación y desarrollo de software</li>
+                        <li>Python</li>
+                        <li>MySQL</li>
+                        <li>Desarrollo web</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="habilidades" class="section">
+
+            <h2>Habilidades</h2>
+
+            <p>
+                Estas son algunas de las tecnologías que utilizo
+                o estoy aprendiendo.
+            </p>
+
+            <div class="skills-grid">
+
+                <article class="skill-card">
+
+                    <i class="fa-brands fa-python"></i>
+
+                    <h3>Python</h3>
+
+                    <p>
+                        Programación, POO, estructuras de datos
+                        y desarrollo de proyectos.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-brands fa-html5"></i>
+
+                    <h3>HTML</h3>
+
+                    <p>
+                        Desarrollo de páginas web utilizando HTML5
+                        y etiquetas semánticas.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-brands fa-css3-alt"></i>
+
+                    <h3>CSS</h3>
+
+                    <p>
+                        Diseño responsive, Flexbox, Grid,
+                        animaciones y variables CSS.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-solid fa-database"></i>
+
+                    <h3>SQL</h3>
+
+                    <p>
+                        Consultas, relaciones, procedimientos
+                        almacenados y bases de datos MySQL.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-brands fa-git-alt"></i>
+
+                    <h3>Git</h3>
+
+                    <p>
+                        Control de versiones y gestión de proyectos.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-brands fa-github"></i>
+
+                    <h3>GitHub</h3>
+
+                    <p>
+                        Repositorios, commits y publicación de proyectos.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-solid fa-microchip"></i>
+
+                    <h3>Arduino</h3>
+
+                    <p>
+                        Programación de microcontroladores
+                        y proyectos de electrónica.
+                    </p>
+
+                </article>
+
+                <article class="skill-card">
+
+                    <i class="fa-solid fa-gamepad"></i>
+
+                    <h3>Pygame</h3>
+
+                    <p>
+                        Desarrollo de videojuegos utilizando Python.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <section id="proyectos" class="section">
+
+            <h2>Proyectos</h2>
+
+            <p>
+                Algunos de los proyectos que desarrollé durante
+                mi aprendizaje.
+            </p>
+
+            <div class="projects-grid">
+
+                <article class="project-card">
+
+                    <img src="{% static 'images/proyecto-60-seconds.png' %}" alt="Proyecto desarrollado con Python">
+
+                    <div class="project-content">
+
+                        <h3>Recreación de 60 Seconds!</h3>
+
+                        <p>
+                            Proyecto desarrollado en Python inspirado en el
+                            videojuego 60 Seconds!, utilizando programación
+                            orientada a objetos, estructuras de datos y Pygame.
+                        </p>
+
+                        <ul>
+                            <li>Python</li>
+                            <li>Pygame</li>
+                            <li>OOP</li>
+                            <li>Estructuras de datos</li>
+                        </ul>
+
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <img src="{% static 'images/proyecto-cines.png' %}" alt="Proyecto de base de datos">
+
+                    <div class="project-content">
+
+                        <h3>Sistema de gestión de cine</h3>
+
+                        <p>
+                            Proyecto de base de datos desarrollado utilizando
+                            MySQL para gestionar películas, funciones,
+                            clientes, tickets y ventas.
+                        </p>
+
+                        <ul>
+                            <li>MySQL</li>
+                            <li>SQL</li>
+                            <li>Stored Procedures</li>
+                            <li>Base de datos</li>
+                        </ul>
+
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <img src="{% static 'images/proyecto-automatizacion.png' %}" alt="Proyecto de automatización">
+
+                    <div class="project-content">
+
+                        <h3>Automatización de facturas</h3>
+
+                        <p>
+                            Sistema de automatización para procesar facturas
+                            y organizar información utilizando herramientas
+                            de automatización e inteligencia artificial.
+                        </p>
+
+                        <ul>
+                            <li>Python</li>
+                            <li>n8n</li>
+                            <li>Google Sheets</li>
+                            <li>IA</li>
+                        </ul>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <section id="blog" class="section">
+
+            <h2>Blog</h2>
+
+            <p>
+                Lo último que escribí sobre programación, proyectos
+                y lo que voy aprendiendo.
+            </p>
+
+            <div class="posts-list">
+                {% for post in latest_posts %}
+                    {% include "blog/_post_card.html" %}
+                {% empty %}
+                    <p class="empty-state">Todavía no hay entradas publicadas.</p>
+                {% endfor %}
+            </div>
+
+            <a href="{% url 'blog:post_list' %}" class="button blog-all">Ver todas las entradas</a>
+
+        </section>
+
+        <section id="contacto" class="section">
+
+            <h2>Contacto</h2>
+
+            <p>
+                Podés encontrarme en los siguientes medios.
+            </p>
+
+            <div class="contact-content">
+
+                <div class="contact-card">
+
+                    <h3>Email</h3>
+
+                    <a href="mailto:garciacarrerafacundo@gmail.com">
+                        garciacarrerafacundo@gmail.com
+                    </a>
+
+                </div>
+
+                <div class="contact-card">
+
+                    <h3>GitHub</h3>
+
+                    <a href="https://github.com/carregca" target="_blank">
+                        Mi GitHub
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+{% endblock %}
